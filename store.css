@@ -1,0 +1,74 @@
+.channel-card-loader {
+    height: 500px;
+    width: 100%;
+    cursor: progress;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    background-color: #0f1420;
+}
+.channel-card-loader::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg, rgb(15 20 32) 0, rgb(15 20 32) 20%, rgb(23 28 42) 60%, rgba(255, 255, 255, 0));
+    -webkit-animation: shimmer 2s infinite;
+    animation: shimmer 2s infinite;
+    content: "";
+}
+@-webkit-keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+
+@media (max-width:767px) {
+    ::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+    }
+
+    #categoryButtons {
+        margin-top: 20px;
+    }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #566178;
+    /* border-radius: 20px; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #111827;
+    /* border-radius: 20px; */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #0a0f18;
+}
+
+.channel-card p a {
+    color: #599fe7;
+}
+
+.channel-card p a:hover {
+    color: #71b2f3;
+}

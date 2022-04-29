@@ -1,0 +1,10 @@
+body {
+    text-align: center;
+    margin: 100px 0 !important;
+    background-image: url("../images/background.svg");
+    background-repeat: no-repeat;
+    /* background-position: center center; */
+    background-size: cover;
+    color: white;
+    min-height: 100vh;
+}
