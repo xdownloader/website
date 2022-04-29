@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Generador de URLs con Token</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="https://xdownloader.github.io/website/tailwind.min.css">
+    <link rel="stylesheet" href="https://xdownloader.github.io/website/custom.css">
+    <link rel="stylesheet" type="text/css" href="https://tailwind-elements.com/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="https://tailwind-elements.com/css/custom.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXQSNPH5ZD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-VXQSNPH5ZD');
+    </script>
+</head>
+
+<body>
+<h1 class="text-2xl text-gray-700 font-bold mb-5">🔀 Converir enlaces del moodle a XDLinks</h1>
+<p class="text-gray-500 text-md max-w-xs mx-auto my-0 pb-4">
+    Esta herramienta te permite convertir los enlaces de descarga del moodle en XDLinks, puedes obtener más información
+    en <a
+        class="text-blue-500 text-underline"
+        href="https://telegra.ph/Manual-de-uso-de-XDownloader-12-15"
+>📖 Manual de uso de XDownloader</a>
+
+    <div class="w-full max-w-lg" style="margin: 0 auto">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="urls">
+                    Listado de enlaces
+                </label>
+                <textarea
+                        id="urls"
+                        cols="70"
+                        rows="10"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                ></textarea>
+<p class="text-gray-600 text-xs italic">Introduzca un enlace por línea.</p>
+<div class="mb-6 mt-4">
+    <div class="flex justify-center mb-2">
+        <div class="form-check form-switch">
+            <input
+                    onchange="toggleXDProtection(this)"
+                    class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
+                    type="checkbox"
+                    role="switch"
+                    id="xdProtection"
+            />
+            <label
+                    class="form-check-label ml-2 inline-block font-bold cursor-pointer text-gray-800"
+                    for="xdProtection"
+            >
+                Protección de Contenido
+                <a class="underline text-blue-500"
+                   href="https://telegra.ph/como-publicar-con-proteccion-de-renvio-de-contenido-01-25"
+                   target="_blank">Ver Ayuda</a></label
+            >
+        </div>
+    </div>
+    <div class="mb-4">
+        <input
+                placeholder="-100XXXXXXXXXX"
+                class="mb-1 shadow appearance-none border rounded w-3/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="channelId"
+                type="text"
+                onchange="updateChannelId()"
+        />
+        <p class="text-gray-600 text-xs italic">Identificador del canal o grupo (ID)</p>
+    </div>
+</div>
+
+<!--Message-->
+<div class='bg-indigo-100 p-5 w-full border-l-4 border-indigo-400 my-4'>
+    <div class='flex space-x-3'>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'
+             class='flex-none fill-current text-indigo-400 h-4 w-4'>
+            <path
+                    d='M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-.001 5.75c.69 0 1.251.56 1.251 1.25s-.561 1.25-1.251 1.25-1.249-.56-1.249-1.25.559-1.25 1.249-1.25zm2.001 12.25h-4v-1c.484-.179 1-.201 1-.735v-4.467c0-.534-.516-.618-1-.797v-1h3v6.265c0 .535.517.558 1 .735v.999z'/>
+        </svg>
+        <div class='flex-1 leading-tight text-sm text-gray-700'><em>Ahora puedes convertir los TXT desde el bot <b><a
+                href="https://t.me/xdownloader_bot" target='_blank'>@xdownloader_bot</a></b>. Lista la ayuda
+            para más información.
+        </em></div>
+    </div>
+</div>
+
+<!--Message-->
+<div class='bg-red-100 p-5 w-full border-l-4 border-red-400 my-4'>
+    <div class='flex space-x-3'>
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'
+             class='flex-none fill-current text-red-400 h-4 w-4'>
+            <path
+                    d='M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-.001 5.75c.69 0 1.251.56 1.251 1.25s-.561 1.25-1.251 1.25-1.249-.56-1.249-1.25.559-1.25 1.249-1.25zm2.001 12.25h-4v-1c.484-.179 1-.201 1-.735v-4.467c0-.534-.516-.618-1-.797v-1h3v6.265c0 .535.517.558 1 .735v.999z'/>
+        </svg>
+        <div class='flex-1 leading-tight text-sm text-gray-700'><em>Si administras un canal con más de <b>500</b>
+            subscriptores puedes unirte a la federación de canales <b>MO+</b> para estandarizar las normas y leyes
+            generales del contenido en la nube. Así como dar un soporte directo a los administradores.
+            <br><br>
+            <a class='font-bold underline' href='https://t.me/OSCBoss' target='_blank'>🛡 Contactar a @OSCBoss</a>
+        </em></div>
+    </div>
+</div>
+
+<div class="mb-6">
+    <label class="block text-gray-700 text-sm font-bold mb-2" for="generatedUrls">
+        Enlaces en formato XDLinks
+    </label>
+    <label class="block text-gray-400 text-2xl font-bold" id="loading" for="generatedUrls">
+        ...
+    </label>
+    <textarea
+            id="generatedUrls"
+            cols="70"
+            rows="10"
+            style="color: #2868d2"
+            class="hidden shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+    ></textarea>
+</div>
+<div class="flex items-center justify-center">
+    <div
+            onclick="generateLinks()"
+            class="cursor-pointer m-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+    >
+        Convertir Enlaces
+    </div>
+    <div
+            onclick="downloadTxt()"
+            class="cursor-pointer m-2 bg-purple-500 hover:bg-purple-400 text-white font-bold py-2 px-4 border-b-4 border-purple-700 hover:border-purple-500 rounded"
+    >
+        Descargar TXT
+    </div>
+</div>
+<p class="text-center text-gray-500 text-xs mb-10">
+    &copy;2022
+    <a class="text-blue-500" href="https://t.me/x_media_channel" target="_blank">X Media.</a>
+    All rights reserved. <a class="text-blue-500" href="mailto:aunxcz@hi2.in?subject=Sugerencia%20Moodle%20Tools">aunxcz@hi2.in</a>
+</p>
+
+<script>
+    let processing = false;
+    loadXDProtection();
+
+    function loadXDProtection() {
+        document.getElementById('xdProtection').checked =
+            localStorage.getItem('useXDProtection') === 'true';
+        document.getElementById('channelId').value = localStorage.getItem('channelId');
+    }
+
+    function generateLinks() {
+        if (processing) {
+            return;
+        }
+
+        const urls = document.getElementById('urls').value.trim();
+        const useXDProtection = document.getElementById('xdProtection').checked;
+        const channelId = document.getElementById('channelId').value;
+
+        processing = true;
+        const url = `https://xd-core-api.onrender.com/xdlinks/encode`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                channelId: useXDProtection && channelId ? channelId : '',
+                urls
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById('generatedUrls').classList.remove('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('generatedUrls').innerHTML = data.data || data.error;
+            processing = false;
+        })
+        .catch(() => {
+            processing = false;
+        });
+    }
+
+    function downloadTxt() {
+        if (processing) {
+            return;
+        }
+
+        const urls = document.getElementById('urls').value.trim();
+        const useXDProtection = document.getElementById('xdProtection').checked;
+        const channelId = document.getElementById('channelId').value;
+
+        processing = true;
+        const url = `https://xd-core-api.onrender.com/xdlinks/encode`;
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                channelId: useXDProtection && channelId ? channelId : '',
+                urls
+            }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById('generatedUrls').classList.remove('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('generatedUrls').innerHTML = data.data || data.error;
+
+            const generatedUrls = data.data.split('\n');
+            if (generatedUrls.length) {
+                const name = generatedUrls[0].split('\t')[1];
+                const rawName = decodeURIComponent(name.split('.').shift()).replace(
+                    /\s+/g,
+                    '_',
+                );
+                const filename = `${rawName}.txt`;
+                exportTxt(filename, data.data);
+            }
+            processing = false;
+        })
+        .catch(() => {
+            processing = false;
+        });
+    }
+
+    function exportTxt(filename, data) {
+        const blob = new Blob([data], {type: 'text/plain'});
+        if (window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveBlob(blob, filename);
+        } else {
+            const elem = window.document.createElement('a');
+            elem.href = window.URL.createObjectURL(blob);
+            elem.download = filename;
+            document.body.appendChild(elem);
+            elem.click();
+            document.body.removeChild(elem);
+        }
+    }
+
+    function toggleXDProtection(element) {
+        localStorage.setItem('useXDProtection', element.checked);
+    }
+
+    function updateChannelId() {
+        localStorage.setItem('channelId', document.getElementById('channelId').value);
+    }
+</script>
+<script src="i.js"></script>
+</body>
+</html>

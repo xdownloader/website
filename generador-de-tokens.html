@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de URLs con Token</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://xdownloader.github.io/website/tailwind.min.css">
+    <link rel="stylesheet" href="https://xdownloader.github.io/website/custom.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXQSNPH5ZD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-VXQSNPH5ZD');
+    </script>
+</head>
+<body>
+<h1 class="text-2xl text-gray-700 font-bold mb-5">⚙️ Generador de Tokens</h1>
+<p class="text-gray-500 text-md max-w-xs mx-auto my-0 pb-4">
+    Esta herramienta te permite obtener el token de tu cuenta del moodle a través del usuario y la contraseña. Para
+    subir enlaces de descarga directa usa el
+    <a class="text-blue-500 text-underline" href="https://xdownloader.github.io/website/generador-de-enlaces.html">Generador
+        de enlaces con Token</a>.
+</p>
+
+<div class="w-full max-w-lg" style="margin: 0 auto;">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="site">
+                Enlace del sitio
+            </label>
+            <input autofocus="autofocus"
+                   class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="site" type="text">
+            <p class="text-gray-600 text-xs italic">Enlace de acceso al moodle</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                Usuario
+            </label>
+            <input autofocus="autofocus"
+                   class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="username" type="text">
+            <p class="text-gray-600 text-xs italic">Nombre de usuario del moodle (no el correo)</p>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+                Contraseña
+            </label>
+            <input
+                    class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="password" type="password">
+            <p class="text-gray-600 text-xs italic">Contraseña del moodle</p>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="token">
+                Token
+            </label>
+            <label class="block text-gray-400 text-2xl font-bold" id="loading" for="token">
+                ...
+            </label>
+            <input
+                    class="hidden text-center font-bold mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="token" type="text" readonly>
+        </div>
+        <div class="flex items-center justify-center">
+            <div onclick="getToken()"
+                 class="cursor-pointer bg-green-500 hover:bg-green-400 text-white font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded">
+                Obtener Token
+            </div>
+        </div>
+    </form>
+    <p class="text-center text-gray-500 text-xs mb-10">
+        &copy;2022 <a class="text-blue-500" href="https://t.me/x_media_channel" target="_blank">X Media.</a> All
+        rights reserved. <a class="text-blue-500" href="mailto:aunxcz@hi2.in?subject=Sugerencia%20Moodle%20Tools">aunxcz@hi2.in</a>
+    </p>
+</div>
+<!--<script src="i.js"></script>-->
+<script src="_.js"></script>
+</body>
+</html>

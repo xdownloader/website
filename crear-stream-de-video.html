@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <title>Generador de URLs con Token</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <link rel='stylesheet' href='https://xdownloader.github.io/website/tailwind.min.css'>
+  <link rel='stylesheet' href='https://xdownloader.github.io/website/custom.css'>
+  <link rel='stylesheet' type='text/css' href='https://tailwind-elements.com/css/custom.css' />
+  <link rel='stylesheet' type='text/css' href='https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css' />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src='https://www.googletagmanager.com/gtag/js?id=G-VXQSNPH5ZD'></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-VXQSNPH5ZD');
+  </script>
+</head>
+
+<body>
+<h1 class='text-2xl text-gray-700 font-bold mb-5'>🎞 Crear Stream de Video</h1>
+<p class='text-gray-500 text-md max-w-xs mx-auto my-0 pb-4'>
+  Esta herramienta te permite crear un video que se puede reproducir en línea usando la nube y sin costo de datos.
+</p>
+
+<div class='w-full max-w-lg' style='margin: 0 auto'>
+  <form class='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+    <div class='mb-6'>
+      <label class='block text-gray-700 text-sm font-bold mb-2' for='url'>
+        Enlace del archivo de video en la nube
+      </label>
+      <textarea
+        placeholder='https://nube.ejemplo.cu/directorio/video.mp4?token=xyz'
+        id='url'
+        cols='70'
+        rows='2'
+        class='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+      ></textarea>
+      <p class='text-gray-600 text-xs italic'>Códecs soportados <b>webm</b> / <b>ogg/theora</b> / <b>hevc/h.265</b> /
+        <b>mpeg-4/h.264</b></p>
+      <div class='mb-6 mt-4'>
+        <div class='mb-4 w-full'>
+          <label class='block text-gray-700 text-sm font-bold mb-2' for='title'>
+            Título del video
+          </label>
+          <input
+            class='mb-1 shadow appearance-none border rounded w-3/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='title'
+            type='text'
+          />
+          <p class='text-gray-600 text-xs italic'>Opcional (Al omitir será autodetectado)</p>
+        </div>
+        <div class='mb-4 w-full'>
+          <label class='block text-gray-700 text-sm font-bold mb-2' for='channel'>
+            Canal de Telegram
+          </label>
+          <input
+            class='mb-1 shadow appearance-none border rounded w-3/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='channel'
+            type='text'
+          />
+          <p class='text-gray-600 text-xs italic'>Opcional (Formato: @mi_canal)</p>
+        </div>
+        <div class='mb-4'>
+          <label class='block text-gray-700 text-sm font-bold mb-2' for='password'>
+            Constraseña
+          </label>
+          <input
+            class='mb-1 shadow appearance-none border rounded w-3/4 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id='password'
+            type='password'
+          />
+          <p class='text-gray-600 text-xs italic'>Opcional</p>
+        </div>
+      </div>
+
+      <!--Message-->
+      <div class='bg-red-100 p-5 w-full border-l-4 border-red-400 my-4'>
+        <div class='flex space-x-3'>
+          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'
+               class='flex-none fill-current text-red-400 h-4 w-4'>
+            <path
+              d='M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-.001 5.75c.69 0 1.251.56 1.251 1.25s-.561 1.25-1.251 1.25-1.249-.56-1.249-1.25.559-1.25 1.249-1.25zm2.001 12.25h-4v-1c.484-.179 1-.201 1-.735v-4.467c0-.534-.516-.618-1-.797v-1h3v6.265c0 .535.517.558 1 .735v.999z' />
+          </svg>
+          <div class='flex-1 leading-tight text-sm text-gray-700'><em>Si administras un canal con más de <b>500</b>
+            subscriptores puedes unirte a la federación de canales <b>MO+</b> para estandarizar las normas y leyes
+            generales del contenido en la nube. Así como dar un soporte directo a los administradores.
+            <br><br>
+            <a class='font-bold underline' href='https://t.me/OSCBoss' target='_blank'>🛡 Contactar a @OSCBoss</a>
+          </em></div>
+        </div>
+      </div>
+
+      <div class="flex justify-center mb-2">
+        <div class="form-check form-switch">
+          <input
+            class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
+            type="checkbox"
+            role="switch"
+            id="allowDownload"
+          />
+          <label
+            class="form-check-label ml-2 inline-block font-bold cursor-pointer text-gray-800"
+            for="allowDownload"
+          >Permitir Descarga</label
+          >
+        </div>
+      </div>
+      <div class="flex justify-center mb-2">
+        <div class="form-check form-switch">
+          <input
+            disabled
+            class="form-check-input appearance-none w-9 -ml-10 rounded-full float-left h-5 align-top bg-white bg-no-repeat bg-contain bg-gray-300 focus:outline-none cursor-pointer shadow-sm"
+            type="checkbox"
+            role="switch"
+            id="xdProtection"
+          />
+          <label
+            class="form-check-label ml-2 inline-block font-bold cursor-pointer text-gray-800"
+            for="xdProtection"
+          >
+            Compartir video en la comunidad</label
+          >
+        </div>
+      </div>
+      <p class='text-gray-400 text-sm max-w-xs mx-auto my-0 pb-6'>Próximamente esta opción estará disponible, haciendo que tus videos se sumen a la galería según su categría.</p>
+      <div class='mb-6'>
+        <label class='block text-gray-700 text-sm font-bold mb-2' for='generatedUrl'>
+          Enlace del video
+        </label>
+        <label class='block text-gray-400 text-2xl font-bold' id='loading' for='generatedUrl'>
+          ...
+        </label>
+        <textarea
+          id='generatedUrl'
+          cols='70'
+          rows='10'
+          style='color: #2868d2'
+          class='hidden shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+        ></textarea>
+      </div>
+      <div class='flex items-center justify-center flex-wrap'>
+        <div
+          onclick='generateLink()'
+          class='w-full cursor-pointer m-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded'
+        >
+          Crear Enlace
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <p class='text-center text-gray-500 text-xs mb-10'>
+      &copy;2022
+      <a class='text-blue-500' href='https://t.me/x_media_channel' target='_blank'>X Media.</a>
+      All rights reserved. <a class='text-blue-500' href='mailto:aunxcz@hi2.in?subject=Sugerencia%20Moodle%20Tools'>aunxcz@hi2.in</a>
+    </p>
+  </form>
+</div>
+
+<script>
+  function generateLink() {
+    let url = document.getElementById('url').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const channel = document.getElementById('channel').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const allowDownload = document.getElementById('allowDownload').checked ? '1' : '0';
+    const eUrl = encodeXDD(`${url}|${title}|${channel}|${password}|${allowDownload}`);
+    document.getElementById('generatedUrl').value = `https://xdownloader.surge.sh/player.html?v=${eUrl}`;
+    document.getElementById('generatedUrl').classList.remove('hidden');
+    document.getElementById('loading').classList.add('hidden');
+  }
+</script>
+
+<script src="i.js"></script>
+<script src="xw.js"></script>
+</body>
+</html>

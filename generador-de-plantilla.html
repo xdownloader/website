@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Plantilla</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://xdownloader.github.io/website/tailwind.min.css">
+    <link rel="stylesheet" href="https://xdownloader.github.io/website/custom.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        a {
+            color: #2868d2;
+        }
+
+        a:hover {
+            color: #407de2;
+            text-decoration: underline;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXQSNPH5ZD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-VXQSNPH5ZD');
+    </script>
+</head>
+
+<body>
+<h1 class="text-2xl text-gray-700 font-bold mb-5">📝 Generador de Plantilla</h1>
+<p class="text-gray-500 text-md max-w-xs mx-auto my-0 pb-4">
+    Esta herramienta te permite generar la descripción en forma de plantilla para los archivos TXT a subir.
+</p>
+
+<div class="w-full max-w-lg" style="margin: 0 auto;">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Nombre
+            </label>
+            <input autofocus="autofocus"
+                   class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="name" type="text">
+        </div>
+        <div class="mb-6">
+            <div class="grid grid-cols-4 gap-2">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="size">
+                        Tamaño
+                    </label>
+                    <input min="0"
+                           class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           id="size" type="number">
+                    <p class="text-gray-600 text-xs italic">En megabytes</p>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="parts">
+                        Partes
+                    </label>
+                    <input min="0"
+                           class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           id="parts" type="number">
+                    <p class="text-gray-600 text-xs italic">En unidades</p>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="partSize">
+                        Tamaño P.
+                    </label>
+                    <input min="0"
+                           class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           id="partSize" type="number">
+                    <p class="text-gray-600 text-xs italic">En megabytes</p>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="expHours">
+                        Expira
+                    </label>
+                    <input min="0"
+                           class="mb-1 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           id="expHours" type="number">
+                    <p class="text-gray-600 text-xs italic">En horas</p>
+                </div>
+            </div>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="template">
+                Plantilla
+            </label>
+            <textarea id="template" cols="70" rows="7"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+            <p class="text-gray-600 text-xs italic">Puede modificar y guardar su propia plantilla. <span
+                    class="font-bold">Markdown Soportado</span></p>
+        </div>
+        <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="renderTemplate">
+                Descripción generada
+            </label>
+            <label class="block text-gray-400 text-2xl font-bold" id="loading" for="renderTemplate">
+                ...
+            </label>
+            <div id="renderTemplate"
+                 class="hidden text-left shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></div>
+        </div>
+        <div class="flex items-center justify-center">
+            <div onclick="resetTemplate()"
+                 class="cursor-pointer m-2 bg-gray-500 hover:bg-gray-400 text-white font-bold py-2 px-4 border-b-4 border-gray-700 hover:border-gray-500 rounded">
+                Plantilla Inicial
+            </div>
+            <div onclick="generateTemplate()"
+                 class="cursor-pointer m-2 bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                Generar Plantilla
+            </div>
+        </div>
+    </form>
+    <p class="text-center text-gray-500 text-xs mb-10">
+        &copy;2022 <a class="text-blue-700" href="https://t.me/x_media_channel" target="_blank">X Media.</a> All
+        rights reserved. <a class="text-blue-500" href="mailto:aunxcz@hi2.in?subject=Sugerencia%20Moodle%20Tools">aunxcz@hi2.in</a>
+    </p>
+</div>
+
+<script>
+    const defaultTemplate = `🏷 {name}\n📦 {size}\n🗜 {parts} partes de {partSize}\n⌛️ {expDate}\n\n¿Cómo descargar? [📖 Ver Guía](https://telegra.ph/Manual-de-uso-de-XDownloader-12-15)`;
+    loadTemplate();
+
+    function loadTemplate() {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+        const savedTemplate = localStorage.getItem('template');
+        const expHours = localStorage.getItem('expHours');
+
+        document.getElementById("template").value = savedTemplate || defaultTemplate;
+        document.getElementById("name").value = decodeURIComponent(params.name || '');
+        document.getElementById("size").value = Number(params.size || 0);
+        document.getElementById("parts").value = Number(params.parts || 0);
+        document.getElementById("partSize").value = Number(params.partSize || 0);
+        document.getElementById("expHours").value = Number(params.expHours || expHours || '24');
+    }
+
+    function resetTemplate() {
+        localStorage.setItem('template', defaultTemplate);
+        localStorage.setItem('expHours', '24');
+        document.getElementById("template").value = defaultTemplate;
+        document.getElementById("expHours").value = 24;
+    }
+
+    function generateTemplate() {
+        const template = document.getElementById("template").value;
+        const name = document.getElementById("name").value || '';
+        const size = humanFileSize(Number(document.getElementById("size").value || 0) * 1000000, true);
+        const parts = document.getElementById("parts").value || 0;
+        const partSize = humanFileSize(Number(document.getElementById("partSize").value || 0) * 1000000, true);
+        const expHours = document.getElementById("expHours").value || 0;
+        const dateTime = (new Date().addHours(expHours || 0));
+        const date = dateTime.toDateString();
+        const time = dateTime.toTimeString().split(' ').shift();
+        const expDate = `${date}, ${time}`;
+
+        const renderTemplate = template
+        .replace('{name}', name)
+        .replace('{size}', size)
+        .replace('{parts}', parts)
+        .replace('{partSize}', partSize)
+        .replace('{expDate}', expDate)
+        .replace(/\n/g, '</br>');
+
+        document.getElementById("renderTemplate").innerHTML = marked.parse(renderTemplate);
+        document.getElementById("renderTemplate").classList.remove("hidden");
+        document.getElementById("loading").classList.add("hidden");
+
+        // save template
+        localStorage.setItem('template', template);
+        localStorage.setItem('expHours', expHours.toString());
+
+        return true;
+    }
+
+    function humanFileSize(bytes, si = false, dp = 1) {
+        const thresh = si ? 1000 : 1024;
+
+        if (Math.abs(bytes) < thresh) {
+            return bytes + ' B';
+        }
+
+        const units = si
+            ? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+            : ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+        let u = -1;
+        const r = 10 ** dp;
+
+        do {
+            bytes /= thresh;
+            ++u;
+        } while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
+
+
+        return bytes.toFixed(dp) + ' ' + units[u];
+    }
+
+    Date.prototype.addHours = function (h) {
+        this.setTime(this.getTime() + (h * 60 * 60 * 1000));
+        return this;
+    }
+</script>
+<script src="i.js"></script>
+</body>
+</html>
